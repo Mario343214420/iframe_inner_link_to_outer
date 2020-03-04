@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <!--基础库-->
+  <script src="../js/lib/vue.min.js"></script>
+  <script src="../js/lib/utils/axios.min.js"></script>
+  <!--bin-ui-->
+  <link rel="stylesheet" href="../js/lib/bin-ui/styles/index.css">
+  <script src="../js/lib/bin-ui/bin-ui.umd.min.js"></script>
+  <!--CSS-->
+  <link rel="stylesheet" href="../styles/reset.css">
+  <link href="https://cdn.bootcss.com/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/index.css">
+</head>
+<body>
+<div id="app" v-cloak>
+<!--头部-->
+<div class="header">
+</div>
+<!--主体部分-->
+<div class="main">
+  <div class="out-box">
+    <div>外部计数：{{ count }}</div>
+    <span>外部操控内部数据:</span>
+    <span class="btn" @click="innerAdd">inner +</span>
+    <span class="btn" @click="innerMinus">inner -</span>
+  </div>
+  <iframe id="iframe" src="./iframe.html" frameborder="0"></iframe>
+</div>
+<!--底部-->
+<div class="footer">
+</div>
+</div>
+<script>
+var vm = new Vue({
+  el: "#app",
+  data: function () {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+  	innerAdd() {
+	  document.getElementById('iframe').contentWindow.vmIframe.count++
+    },
+  	innerMinus() {
+		  document.getElementById('iframe').contentWindow.vmIframe.count--
+    }
+  }
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/lib/vue.min.js"></script>
+    <style>
+        div{
+            line-height: 40px;
+        }
+        .btn{
+            border: 1px solid #000;
+            padding: 4px 20px;
+            margin: 0 10px;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="iframe">
+    <div>This is iframe</div>
+    <div>引用页面测试</div>
+    <div>介绍</div>
+    <div>使用声明式引用vue.min.js</div>
+    <div>测试vue动态数据及功能的iframe嵌套使用，实现老页面直接引用，避免重复开发，并兼容vue多种功能</div>
+    <div>测试区</div>
+    <div>
+        <span>iframe内部计数：{{ count }}</span>
+        <span class="btn" @click="add">+</span><span class="btn" @click="minus">-</span>
+    </div>
+    <div>
+        <span>这里触发外层父级页面变动</span>
+        <span class="btn" @click="outAdd">outer +</span>
+        <span class="btn" @click="outMinus">outer -</span>
+    </div>
+</div>
+<script>
+var vmIframe = new Vue({
+  el:"#iframe",
+  data: function () {
+    return {
+      count: 0
+      }
+    },
+  methods: {
+    minus() { this.count -- },
+    add() { this.count ++ },
+    outMinus() {  parent.window.vm.count -- },
+    outAdd() { parent.window.vm.count ++ }
+  }
+})
+</script>
+</body>
+</html>
